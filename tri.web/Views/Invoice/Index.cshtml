@@ -1,0 +1,141 @@
+﻿@model IEnumerable<tri.entity.Invoice>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script>
+    function activatejQueryTable() {
+
+        $('#InvoiceTable').dataTable();
+    }
+
+    $(function () {
+        activatejQueryTable();
+    });
+
+</script>
+<h2>Invoices</h2>
+
+<style type="text/css">
+    .less100 {
+        background-color: red;
+    }
+
+    .between100and200 {
+        background-color: yellow;
+    }
+
+    .more200 {
+        background-color: green;
+    }
+</style>
+
+<table class="table" id="InvoiceTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.InvoiceId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxPointDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalNet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalVat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalGross)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account.Address1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account.Address2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account.Town)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account.County)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account.PostCode)
+            </th>
+        </tr>
+    </thead>
+
+    
+        @foreach (var item in Model)
+        {
+           
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvoiceId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaxPointDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reference)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalNet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalVat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalGross)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.Address1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.Address2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.Town)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.County)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.PostCode)
+                </td>
+
+            </tr>
+        }
+
+</table>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        HighLightRowsLessThanColumnValue('InvoiceTable', 6);
+    });
+
+    function HighLightRowsLessThanColumnValue(gridviewID, columnIndex) {
+        $("#" + gridviewID + " td:nth-child(" + columnIndex + ")").each(function () {
+
+            if (parseInt($(this).text()) < 100) 
+                $(this).parent("tr").css("background-color", "Red ");
+            else if (parseInt($(this).text()) >= 100 && parseInt($(this).text()) <= 200) 
+                    $(this).parent("tr").css("background-color", "Yellow ");
+            else 
+                $(this).parent("tr").css("background-color", "Green ");
+            
+        });
+    }
+
+</script>
